@@ -1,0 +1,18 @@
+body {
+  height: 100vh;
+}
+main {
+  padding: 10px 0px 10px 0px;
+  max-width: 650px !important;
+}
+.form-container {
+  max-width: 350px;
+}
+
+.feedContainer {
+  max-width: 450px;
+}
+
+.card-body {
+  min-height: 250px;
+}
