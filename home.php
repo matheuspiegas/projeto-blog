@@ -43,7 +43,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
     <main class="container border-start border-end">
         <div class="container feedContainer mt-4">
             <?php
-            $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
+            $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id, usuarios.foto FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
             $stmt = $conn->prepare($sqlSelect);
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
@@ -53,7 +53,15 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                     $dataFormatada = date('d/m/Y', $timestamp);
                     echo '<div class="card mb-3">';
                     echo '<div class = "card-header">';
-                    echo '<h6 class="card-title mb-0">' . $row->nome . '</h6>';
+                    echo '<div class="d-flex align-items-center">';
+                    if(empty($row->foto)){
+                        $imgDefault = '<img src="uploads/default_user.png" alt="" width="50" height="50" class="rounded"></img>';
+                    } else {
+                        $imgDefault = '<img src="'. $row->foto . '" width="50" height="50" style="border-radius: 50%;"></img>';
+                    }
+                    echo $imgDefault;
+                    echo '<h6 class="card-title mx-1">' . $row->nome . '</h6>';
+                    echo '</div>';
                     echo '</div>';
                     echo '<div class="card-body">';
                     echo '<h4>' . $row->titulo . '</h4>';

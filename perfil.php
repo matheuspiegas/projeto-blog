@@ -47,6 +47,7 @@ if ($_SESSION['autenticado'] == true) {
     <main class="container">
         <div class="container">
             <h1>Suas postagens</h1>
+            <a href="editarperfil.php?id=<?php echo$_SESSION['userId']; ?>">Editar pefil</a>
             <?php if ($result->num_rows > 0) {
                 echo '<br>';
                 while ($row = $result->fetch_object()) {
