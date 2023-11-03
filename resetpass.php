@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute();
             $msgSucesso = 'Senha alterada com sucesso!';
         }
-        if(empty($user) && empty($pass)){
+        if (empty($user) && empty($pass)) {
             $msgErro = 'Preencha todos os campos!';
         }
-        if(!empty($user) && empty($pass)){
+        if (!empty($user) && empty($pass)) {
             $msgErro = 'Senha não pode estar em branco!';
         }
-        if(empty($user) && !empty($pass)){
+        if (empty($user) && !empty($pass)) {
             $msgErro = 'Usuário não pode estar em branco!';
         }
     }
@@ -44,34 +44,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-
-    <main class="container m-auto mt-5">
-        <form action="" method="post" class="form-container m-auto">
-            <div class="container">
-                <h1>Redefinir senha</h1>
-                <div class="row">
-                    <div class="mb-2">
-                        <input type="text" name="user" class="form-control" placeholder="Digite seu usuário">
-                    </div>
-                    <div class="mb-2">
-                        <input type="password" name="pass" class="form-control" placeholder="Nova senha">
-                    </div>
-                    <div class="mb-2">
-                        <button class="btn bg-secondary-subtle mb-1" type="submit">Enviar</button>
-                        <br>
-                        <a href="login.php">Fazer Login</a>
-                    </div>
-                    <?php
-                    if ($msgErro != null) { ?>
-                        <p class="text-danger"><?php echo $msgErro ?></p>
-                    <?php } elseif ($msgSucesso != null) { ?>
-                        <p class="text-success"><?php echo $msgSucesso ?></p>
-                    <?php }
-                    ?>
-                </div>
+<body class="d-flex align-items-center">
+    <main class="m-auto">
+        <div class="d-flex container gap-3">
+            <div class="imagem d-none d-md-block">
+                <img src="assets/forget_pass.svg" alt="" class="img-fluid">
             </div>
-        </form>
+            <div class=" align-self-center">
+                <form action="" method="post" class="">
+                    <h1 class="mb-5">Redefinir senha</h1>
+                    <div class="row">
+                        <div class="col-12 mb-2">
+                            <input type="text" name="user" class="form-control" placeholder="Digite seu usuário">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <input type="password" name="pass" class="form-control" placeholder="Nova senha">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12"><button class="btn bg-secondary-subtle mb-1" type="submit">Enviar</button></div>
+                        <div class="col-12">
+                            <?php
+                            if ($msgErro != null) { ?>
+                                <p class="text-danger mb-0"><?php echo $msgErro ?></p>
+                            <?php } elseif ($msgSucesso != null) { ?>
+                                <p class="text-success mb-0"><?php echo $msgSucesso ?></p>
+                            <?php }
+                            ?>
+                        </div>
+                        <div class="col-12"><a href="login.php">Fazer Login</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
 
