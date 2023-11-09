@@ -32,7 +32,6 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
     $stmt->bind_param('s', $_SESSION['user']);
     $stmt->execute();
     $result = $stmt->get_result();
-
 } else {
     header('Location: login.php');
 } ?>
@@ -49,7 +48,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="overflow-y-hidden">
+<body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -72,33 +71,33 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
     </header>
     <main class="m-auto mt-5">
 
-        <div class="container d-flex">
+        <div class="container d-md-flex">
             <div class="container">
-            <h1 class="text-center">Editar Perfil</h1>
-            <?php if (empty($resultado_dir)) { ?>
-                <div class="d-flex justify-content-center perfil-imagem m-auto mb-4">
-                    <img src="uploads/default_user.png" alt="" class="imagem-perfil-redonda" style="max-width: 300px;">
-                </div>
-                <h3 class="text-center"><?php echo $_SESSION['user'] ?></h3>
-                <div class="d-flex justify-content-center">
-                    <form action="" method="post" enctype="multipart/form-data" style="max-width: 300px;">
-                        <input type="file" name="foto" class="form-control mb-2">
-                        <input type="submit" value="Enviar" name="enviar" class="form-control btn btn-primary mb-2">
-                    </form>
-                </div>
-            <?php } else { ?>
-                <div class="d-flex justify-content-center perfil-imagem m-auto mb-4">
-                    <img src="<?php echo $resultado_dir; ?>" alt="" class="imagem-perfil-redonda rounded-circle" style="max-width: 300px;">
-                </div>
-                <div class="d-flex justify-content-center">
-                    <form action="" method="post" enctype="multipart/form-data" style="max-width: 300px;">
-                        <input type="file" name="foto" class="form-control mb-2">
-                        <input type="submit" value="Enviar" name="enviar" class="form-control btn btn-primary mb-2">
-                    </form>
-                </div>
-            <?php } ?>
+                <h1 class="text-center">Editar Perfil</h1>
+                <?php if (empty($resultado_dir)) { ?>
+                    <div class="d-flex justify-content-center perfil-imagem m-auto mb-4">
+                        <img src="uploads/default_user.png" alt="" class="imagem-perfil-redonda" style="max-width: 300px;">
+                    </div>
+                    <h3 class="text-center"><?php echo $_SESSION['user'] ?></h3>
+                    <div class="d-flex justify-content-center">
+                        <form action="" method="post" enctype="multipart/form-data" style="max-width: 300px;">
+                            <input type="file" name="foto" class="form-control mb-2">
+                            <input type="submit" value="Enviar" name="enviar" class="form-control btn btn-primary mb-2">
+                        </form>
+                    </div>
+                <?php } else { ?>
+                    <div class="d-flex justify-content-center perfil-imagem m-auto mb-4">
+                        <img src="<?php echo $resultado_dir; ?>" alt="" class="imagem-perfil-redonda rounded-circle" style="max-width: 300px;">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form action="" method="post" enctype="multipart/form-data" style="max-width: 300px;">
+                            <input type="file" name="foto" class="form-control mb-2">
+                            <input type="submit" value="Enviar" name="enviar" class="form-control btn btn-primary mb-2">
+                        </form>
+                    </div>
+                <?php } ?>
             </div>
-            <div class="container">
+            <div class="container teste">
                 <h1>Suas postagens</h1>
                 <?php if ($result->num_rows > 0) {
                     echo '<br>';
