@@ -16,13 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->close();
             $_SESSION['autenticado'] = true;
             $_SESSION['user'] = $username;
-            $sqlid = 'SELECT usuarios.id FROM usuarios WHERE BINARY nome = ?';
-            $stmt = $conn->prepare($sqlid);
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
-            $stmt->bind_result($userId);
-            $stmt->fetch();
-            $stmt->close();
             $_SESSION['userId'] = $userId;
             header('Location: home.php');
         } elseif (empty($username) || empty($password)) {
