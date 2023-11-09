@@ -45,18 +45,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body class="d-flex align-items-center">
+<<<<<<< HEAD
+=======
+    <?php if (isset($_GET['erro'])) { ?>
+        <main class="m-auto">
+        <div class="d-flex container gap-3">
+                <div class="imagem d-none d-md-block">
+                    <img src="assets/sign_up.svg" alt="" class="img-fluid">
+                </div>
+                <div class="align-self-center">
+                    <h1 class="text-start h1 mb-5">Faça Login</h1>
+                    <form action="login.php" method="post" class="p-0">
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                            </div>
+                            <div class="col-12">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
+                            <div class="d-flex col-12 mb-3"><a class="btn bg-secondary-subtle flex-grow-1" href="cadastro.php">Cadastrar</a></div>
+                            <p class="text-danger">Credenciais inválidas!</p>
+                        </div>
+                        <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
+                    </form>
+                </div>
+            </div>
+        </main>
+    <?php } ?>
+>>>>>>> 67e92c54c78dd2e64401a03e78097b7f523827b3
     <?php if (!empty($_GET['cadastro']) && $_GET['cadastro'] == 'sucesso') { ?>
         <main class="m-auto">
-            <div class="d-flex flex-column">
-                <h1 class="text-start h1">Faça Login</h1>
-                <form action="login.php" method="post" class="container form-container p-0">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-2">
-                            <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+        <div class="d-flex container gap-3">
+                <div class="imagem d-none d-md-block">
+                    <img src="assets/sign_up.svg" alt="" class="img-fluid">
+                </div>
+                <div class="align-self-center">
+                    <h1 class="text-start h1 mb-5">Faça Login</h1>
+                    <form action="login.php" method="post" class="p-0">
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                            </div>
+                            <div class="col-12">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                        <div class="row">
+                            <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
+                            <div class="d-flex col-12 mb-3"><a class="btn bg-secondary-subtle flex-grow-1" href="cadastro.php">Cadastrar</a></div>
+                            <p class="text-success">Usuário cadastrado com sucesso!</p>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <div class="row">
                         <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
@@ -65,20 +107,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <a href="resetpass.php" class="">Esqueceu sua senha?</a>
                 </form>
+=======
+                        <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
+                    </form>
+                </div>
+>>>>>>> 67e92c54c78dd2e64401a03e78097b7f523827b3
             </div>
         </main> <?php } ?>
     <?php if ($_SERVER['REQUEST_URI'] == '/projetoBlog/login.php') { ?>
         <main class="m-auto">
-            <div class="d-flex flex-column">
-                <h1 class="text-start h1">Faça Login</h1>
-                <form action="login.php" method="post" class="container form-container p-0">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-2">
-                            <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+            <div class="d-flex container gap-3">
+                <div class="imagem d-none d-md-block">
+                    <img src="assets/sign_up.svg" alt="" class="img-fluid">
+                </div>
+                <div class="align-self-center">
+                    <h1 class="text-start h1 mb-5">Faça Login</h1>
+                    <form action="login.php" method="post" class="p-0">
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                            </div>
+                            <div class="col-12">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                        <div class="row">
+                            <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
+                            <div class="d-flex col-12 mb-3"><a class="btn bg-secondary-subtle flex-grow-1" href="cadastro.php">Cadastrar</a></div>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <div class="row">
                         <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
@@ -89,6 +146,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
                 </form>
+=======
+                        <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
+                    </form>
+                </div>
+>>>>>>> 67e92c54c78dd2e64401a03e78097b7f523827b3
             </div>
         </main> <?php } ?>
 

@@ -47,16 +47,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="d-flex align-items-center">
     <?php if (!empty($_GET['erro']) && $_GET['erro'] == 'vazios') { ?>
         <main class="m-auto">
-            <div class="d-flex flex-column">
-                <h1 class="text-start h1">Faça seu cadastro</h1>
-                <form action="" method="post" class="container form-container p-0">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-2">
-                            <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+            <div class="d-flex container gap-3">
+                <div class="imagem d-none d-md-block">
+                    <img src="assets/sign_in.svg" alt="" class="img-fluid">
+                </div>
+                <div class="align-self-center">
+                    <form action="" method="post" class="container form-container p-0">
+                        <h1 class="text-start h1">Faça seu cadastro</h1>
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                            </div>
+                            <div class="col-12">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                        <div class="row">
+                            <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
+                            <p class="text-danger">Preencha todos os campos!</p>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <div class="row">
                         <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
@@ -64,6 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
                 </form>
+=======
+                    </form>
+                </div>
+>>>>>>> 67e92c54c78dd2e64401a03e78097b7f523827b3
             </div>
         </main>
     <?php } ?>
@@ -72,49 +86,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <?php if (!empty($_GET['erro']) && $_GET['erro'] == 'existente') { ?>
         <main class="m-auto">
-            <div class="d-flex flex-column">
-                <h1 class="text-start h1">Faça seu cadastro</h1>
-                <form action="" method="post" class="container form-container p-0">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-1">
-                            <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+            <div class="d-flex container gap-3">
+                <div class="imagem d-none d-md-block">
+                    <img src="assets/sign_in.svg" alt="" class="img-fluid">
+                </div>
+                <div class="align-self-center">
+                    <form action="" method="post" class="container form-container p-0">
+                        <h1 class="text-start h1">Faça seu cadastro</h1>
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                            </div>
+                            <div class="col-12">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                        <div class="row">
+                            <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
+                            <p class="text-danger">Esse usuário ja existe!</p>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="d-flex col-12 mb-1"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
-                        <p class="text-danger">Esse usuário já existe!</p>
-                    </div>
-                    <a href="#" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
-                </form>
+                    </form>
+                </div>
             </div>
         </main> <?php } ?>
 
 
     <?php if ($_SERVER['REQUEST_URI'] == '/projetoBlog/cadastro.php') { ?>
         <main class="m-auto">
-            <div class="d-flex flex-column">
-                <h1 class="text-start h1">Faça seu cadastro</h1>
-                <form action="" method="post" class="container form-container p-0">
-                    <div class="row mb-3">
-                        <div class="col-12 mb-1">
-                            <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+            <div class="d-flex container gap-3">
+                <div class="imagem d-none d-md-block">
+                    <img src="assets/sign_in.svg" alt="" class="img-fluid">
+                </div>
+                <div class="align-self-center">
+                    <form action="" method="post" class="container form-container p-0">
+                        <h1 class="text-start h1">Faça seu cadastro</h1>
+                        <div class="row mb-3">
+                            <div class="col-12 mb-2">
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                            </div>
+                            <div class="col-12">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                        <div class="row">
+                            <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="d-flex col-12 mb-1"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
-                    </div>
-                    <a href="#" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
-                </form>
+                    </form>
+                </div>
             </div>
         </main> <?php } ?>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
