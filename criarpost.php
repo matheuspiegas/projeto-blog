@@ -39,17 +39,17 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="home.php">Home</a>
+                <a class="navbar-brand" href="home.php"> <i class="fa-solid fa-arrow-left mx-2"> </i>Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                        <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId'];?>">Perfil</a>
+                            <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId']; ?>"><i class="fa-solid fa-user mx-2"></i>Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="logout.php?sair">Sair</a>
+                            <a class="nav-link" href="logout.php?sair"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i>Sair</a>
                         </li>
                     </ul>
                 </div>
@@ -76,6 +76,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
         </form>
     </main>
 
+    <script src="https://kit.fontawesome.com/ce1e855864.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
