@@ -2,6 +2,7 @@ body {
   height: 100vh;
 }
 .main {
+  max-width: 650px !important;
   padding: 10px 0px 10px 0px;
 }
 .form-container {

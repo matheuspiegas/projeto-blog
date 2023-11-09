@@ -66,18 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
                             <p class="text-danger">Preencha todos os campos!</p>
                         </div>
-<<<<<<< HEAD
-                    </div>
-                    <div class="row">
-                        <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
-                        <p class="text-danger">Preencha todos os campos!</p>
-                    </div>
-                    <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
-                </form>
-=======
                     </form>
                 </div>
->>>>>>> 67e92c54c78dd2e64401a03e78097b7f523827b3
             </div>
         </main>
     <?php } ?>
