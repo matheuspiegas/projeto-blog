@@ -40,7 +40,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
             </div>
         </nav>
     </header>
-    <main class="container border-start border-end main">
+    <main class="container border-start border-end main border-bottom h-100">
         <div class="container feedContainer mt-4">
             <?php
             $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id, usuarios.foto FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
