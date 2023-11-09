@@ -1,12 +1,38 @@
 <?php
 session_start();
 require 'connection.php';
-if ($_SESSION['autenticado'] == true) {
-    $sql = "SELECT usuarios.nome, usuarios.id, posts.titulo, posts.content, posts.data_post, posts.id FROM usuarios INNER JOIN posts ON posts.user_id = usuarios.id AND usuarios.nome = ?";
+if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSION['autenticado'] == true) {
+    $sqlselect = "SELECT usuarios.nome, usuarios.id, posts.titulo, posts.content, posts.data_post, posts.id FROM usuarios INNER JOIN posts ON posts.user_id = usuarios.id AND usuarios.nome = ?";
+
+    $sql = "SELECT usuarios.nome, usuarios.foto FROM usuarios WHERE usuarios.id = ? ";
     $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $_SESSION['userId']);
+    $stmt->execute();
+    $stmt->bind_result($result, $resultado_dir);
+    $stmt->fetch();
+    $stmt->close();
+    if (isset($_POST['enviar'])) {
+        $nome_arquivo = $_FILES['foto']['name'];
+        $nome_temporario = $_FILES['foto']['tmp_name'];
+        $pasta_destino = "uploads/";
+        $novo_nome_arquivo = $pasta_destino . uniqid() . '_' . $nome_arquivo;
+        if (move_uploaded_file($nome_temporario, $novo_nome_arquivo)) {
+            $sqlfoto = 'UPDATE usuarios SET foto = ? WHERE id = ?';
+            $stmt = $conn->prepare($sqlfoto);
+            $stmt->bind_param('si', $novo_nome_arquivo, $_SESSION['userId']);
+            if ($stmt->execute()) {
+                $linhas_afetadas = $stmt->affected_rows;
+                $stmt->close();
+                $resultado_dir = $novo_nome_arquivo;
+            }
+        }
+    }
+
+    $stmt = $conn->prepare($sqlselect);
     $stmt->bind_param('s', $_SESSION['user']);
     $stmt->execute();
     $result = $stmt->get_result();
+
 } else {
     header('Location: login.php');
 } ?>
@@ -23,7 +49,7 @@ if ($_SESSION['autenticado'] == true) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="overflow-y-hidden">
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -44,32 +70,61 @@ if ($_SESSION['autenticado'] == true) {
             </div>
         </nav>
     </header>
-    <main class="container">
-        <div class="container">
-            <h1>Suas postagens</h1>
-            <a href="editarperfil.php?id=<?php echo$_SESSION['userId']; ?>">Editar pefil</a>
-            <?php if ($result->num_rows > 0) {
-                echo '<br>';
-                while ($row = $result->fetch_object()) {
-                    $data = date('d/m/y', strtotime($row->data_post));
-                    echo '<div class="card mb-3">';
-                    echo '<div class = "card-header">';
-                    echo '<div class="d-flex justify-content-between align-items-center">';
-                    echo '<h6 class="card-title m-0">' . $row->nome . '</h6> <a href="apagar.php?id=' . $row->id . '" class="text-end text-danger">Apagar</a>';
+    <main class="m-auto mt-5">
+
+        <div class="container d-flex">
+            <div class="container">
+            <h1 class="text-center">Editar Perfil</h1>
+            <?php if (empty($resultado_dir)) { ?>
+                <div class="d-flex justify-content-center perfil-imagem m-auto mb-4">
+                    <img src="uploads/default_user.png" alt="" class="imagem-perfil-redonda" style="max-width: 300px;">
+                </div>
+                <h3 class="text-center"><?php echo $_SESSION['user'] ?></h3>
+                <div class="d-flex justify-content-center">
+                    <form action="" method="post" enctype="multipart/form-data" style="max-width: 300px;">
+                        <input type="file" name="foto" class="form-control mb-2">
+                        <input type="submit" value="Enviar" name="enviar" class="form-control btn btn-primary mb-2">
+                    </form>
+                </div>
+            <?php } else { ?>
+                <div class="d-flex justify-content-center perfil-imagem m-auto mb-4">
+                    <img src="<?php echo $resultado_dir; ?>" alt="" class="imagem-perfil-redonda rounded-circle" style="max-width: 300px;">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <form action="" method="post" enctype="multipart/form-data" style="max-width: 300px;">
+                        <input type="file" name="foto" class="form-control mb-2">
+                        <input type="submit" value="Enviar" name="enviar" class="form-control btn btn-primary mb-2">
+                    </form>
+                </div>
+            <?php } ?>
+            </div>
+            <div class="container">
+                <h1>Suas postagens</h1>
+                <?php if ($result->num_rows > 0) {
+                    echo '<br>';
+                    echo '<div class="overflow-y-scroll" style="height:70vh;">';
+                    while ($row = $result->fetch_object()) {
+                        $data = date('d/m/y', strtotime($row->data_post));
+                        echo '<div class="card mb-3">';
+                        echo '<div class = "card-header">';
+                        echo '<div class="d-flex justify-content-between align-items-center">';
+                        echo '<h6 class="card-title m-0">' . $row->nome . '</h6> <a href="apagar.php?idpost=' . $row->id . '" class="text-end text-danger">Apagar</a>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '<div class="card-body">';
+                        echo '<h4>' . $row->titulo . '</h4>';
+                        echo '<p class="lead">' . $row->content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="mb-0" style="color: #6c757d;">' . $data . '</small>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
                     echo '</div>';
-                    echo '</div>';
-                    echo '<div class="card-body">';
-                    echo '<h4>' . $row->titulo . '</h4>';
-                    echo '<p class="lead">' . $row->content . '</p>';
-                    echo '</div>';
-                    echo '<div class="card-footer">';
-                    echo '<small class="mb-0" style="color: #6c757d;">' . $data . '</small>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-            } else {
-                echo 'Não há posts';
-            } ?>
+                } else {
+                    echo '<p>Não há posts</p>';
+                } ?>
+            </div>
         </div>
     </main>
 

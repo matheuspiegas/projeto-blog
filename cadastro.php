@@ -4,6 +4,7 @@ require 'connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['user'];
     $password = $_POST['password'];
+    $hashPass = password_hash($password, PASSWORD_DEFAULT);
     if (empty($username) || empty($password)) {
         header('Location: cadastro.php?erro=vazios');
         exit();
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->bind_result($count);
-    $stmt->fetch(); //fetch() armazena o resultado do bind_result() na variavel passada por parametro. é obrigatorio sempre ter um fetch logo apos um bidn_result().
+    $stmt->fetch(); //fetch() armazena o resultado do bind_result() na variavel passada por parametro. é obrigatorio sempre ter um fetch logo apos um bind_result().
     $stmt->close(); // é essencial se tiver mais de uma query sempre fechar uma antes de iniciar a outra.
     if ($count > 0) {
         header('Location: cadastro.php?erro=existente');
@@ -22,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = 'INSERT INTO usuarios(nome, senha, data_cadastro) VALUES (?, ?, NOW())';
         $stmt = $conn->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param('ss', $username, $password);
+            $stmt->bind_param('ss', $username, $hashPass);
             if ($stmt->execute()) {
                 $stmt->close();
                 header('Location: login.php?cadastro=sucesso');
@@ -61,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
                         <p class="text-danger">Preencha todos os campos!</p>
                     </div>
-                    <a href="#" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
+                    <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
                 </form>
             </div>
         </main>

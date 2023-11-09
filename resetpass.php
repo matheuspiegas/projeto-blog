@@ -7,17 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['user']) && isset($_POST['pass'])) {
         $user = $_POST['user'];
         $pass = $_POST['pass'];
+        $hashPass = password_hash($pass, PASSWORD_DEFAULT);
         $sql = 'SELECT COUNT(*) FROM usuarios WHERE usuarios.nome = ?';
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $user);
         $stmt->execute();
         $stmt->bind_result($count);
         $stmt->fetch();
+        $passVerify = password_verify($pass, $hashPass);
         $stmt->close();
-        if ($count == 1 && !empty($pass) && !empty($user)) {
+        if ($count == 1 && !empty($pass) && !empty($user) && $passVerify == true) {
             $resetPass = 'update usuarios set usuarios.senha = ? where usuarios.nome = ?';
             $stmt = $conn->prepare($resetPass);
-            $stmt->bind_param('ss', $pass, $user);
+            $stmt->bind_param('ss', $hashPass, $user);
             $stmt->execute();
             $msgSucesso = 'Senha alterada com sucesso!';
         }

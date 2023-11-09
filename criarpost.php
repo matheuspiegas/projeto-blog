@@ -46,7 +46,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="perfil.php">Perfil</a>
+                        <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId'];?>">Perfil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php?sair">Sair</a>

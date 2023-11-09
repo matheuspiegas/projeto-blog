@@ -30,7 +30,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                             <a class="nav-link" aria-current="page" href="criarpost.php">Novo post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="perfil.php">Perfil</a>
+                            <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId'];?>">Perfil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php?sair">Sair</a>
@@ -40,7 +40,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
             </div>
         </nav>
     </header>
-    <main class="container border-start border-end">
+    <main class="container border-start border-end main">
         <div class="container feedContainer mt-4">
             <?php
             $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id, usuarios.foto FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
@@ -57,9 +57,9 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                     if(empty($row->foto)){
                         $imgDefault = '<img src="uploads/default_user.png" alt="" width="50" height="50" class="rounded"></img>';
                     } else {
-                        $imgDefault = '<img src="'. $row->foto . '" width="50" height="50" style="border-radius: 50%;"></img>';
+                        $imgDefault = '<img src="'. $row->foto . '" class="imagem-perfil-redonda"></img>';
                     }
-                    echo $imgDefault;
+                    echo '<div class="rounded-circle overflow-hidden" style="width:50px; height:50px;">'. $imgDefault . '</div>';
                     echo '<h6 class="card-title mx-1">' . $row->nome . '</h6>';
                     echo '</div>';
                     echo '</div>';
