@@ -27,20 +27,20 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="criarpost.php">Novo post</a>
+                            <a class="nav-link" aria-current="page" href="criarpost.php"><i class="fa-solid fa-plus mx-2"></i>Novo post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId'];?>">Perfil</a>
+                            <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId']; ?>"><i class="fa-solid fa-user mx-2"></i>Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="logout.php?sair">Sair</a>
+                        <a class="nav-link" href="logout.php?sair"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i>Sair</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <main class="container border-start border-end main">
+    <main class="container border-start border-end main border-bottom h-100">
         <div class="container feedContainer mt-4">
             <?php
             $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id, usuarios.foto FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
@@ -54,12 +54,12 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                     echo '<div class="card mb-3">';
                     echo '<div class = "card-header">';
                     echo '<div class="d-flex align-items-center">';
-                    if(empty($row->foto)){
+                    if (empty($row->foto)) {
                         $imgDefault = '<img src="uploads/default_user.png" alt="" width="50" height="50" class="rounded"></img>';
                     } else {
-                        $imgDefault = '<img src="'. $row->foto . '" class="imagem-perfil-redonda"></img>';
+                        $imgDefault = '<img src="' . $row->foto . '" class="imagem-perfil-redonda"></img>';
                     }
-                    echo '<div class="rounded-circle overflow-hidden" style="width:50px; height:50px;">'. $imgDefault . '</div>';
+                    echo '<div class="rounded-circle overflow-hidden" style="width:50px; height:50px;">' . $imgDefault . '</div>';
                     echo '<h6 class="card-title mx-1">' . $row->nome . '</h6>';
                     echo '</div>';
                     echo '</div>';
@@ -76,7 +76,8 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
             ?>
         </div>
     </main>
-
+    
+    <script src="https://kit.fontawesome.com/ce1e855864.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
