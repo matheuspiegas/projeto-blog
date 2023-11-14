@@ -62,7 +62,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                                     $imgDefault = '<img src="' . $row->foto . '" class="imagem-perfil-redonda"></img>';
                                 } ?>
                                 <div class="rounded-circle overflow-hidden" style="width:50px; height:50px;"> <?php echo $imgDefault; ?></div>
-                                <h6 class="card-title mx-1"><?php echo $row->nome; ?> <?php echo $_SESSION['post_id']; ?></h6>
+                                <h6 class="card-title mx-1"><?php echo $row->nome; ?></h6>
                             </div>
                         </div>
                         <div class="card-body">
