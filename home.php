@@ -33,14 +33,14 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                             <a class="nav-link" href="perfil.php?id=<?php echo $_SESSION['userId']; ?>"><i class="fa-solid fa-user mx-2"></i>Perfil</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="logout.php?sair"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i>Sair</a>
+                            <a class="nav-link" href="logout.php?sair"><i class="fa-solid fa-arrow-right-from-bracket mx-2"></i>Sair</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <main class="container border-start border-end main border-bottom h-100">
+    <main class="container border-start border-end main border-bottom">
         <div class="container feedContainer mt-4">
             <?php
             $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id, usuarios.foto FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
@@ -50,33 +50,52 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                 while ($row = $result->fetch_object()) {
                     $data = $row->data_post;
                     $timestamp = strtotime($data);
-                    $dataFormatada = date('d/m/Y', $timestamp);
-                    echo '<div class="card mb-3">';
-                    echo '<div class = "card-header">';
-                    echo '<div class="d-flex align-items-center">';
-                    if (empty($row->foto)) {
-                        $imgDefault = '<img src="uploads/default_user.png" alt="" width="50" height="50" class="rounded"></img>';
-                    } else {
-                        $imgDefault = '<img src="' . $row->foto . '" class="imagem-perfil-redonda"></img>';
-                    }
-                    echo '<div class="rounded-circle overflow-hidden" style="width:50px; height:50px;">' . $imgDefault . '</div>';
-                    echo '<h6 class="card-title mx-1">' . $row->nome . '</h6>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '<div class="card-body">';
-                    echo '<h4>' . $row->titulo . '</h4>';
-                    echo '<p class="lead">' . $row->content . '</p>';
-                    echo '</div>';
-                    echo '<div class="card-footer">';
-                    echo '<small class="mb-0" style="color: #6c757d;">' . $dataFormatada . '</small>';
-                    echo '</div>';
-                    echo '</div>';
-                }
+                    $dataFormatada = date('d/m/Y', $timestamp); 
+                    $_SESSION['post_id'] = $row->id;
+                    ?>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <?php if (empty($row->foto)) {
+                                    $imgDefault = '<img src="uploads/default_user.png" alt="" width="50" height="50" class="rounded"></img>';
+                                } else {
+                                    $imgDefault = '<img src="' . $row->foto . '" class="imagem-perfil-redonda"></img>';
+                                } ?>
+                                <div class="rounded-circle overflow-hidden" style="width:50px; height:50px;"> <?php echo $imgDefault; ?></div>
+                                <h6 class="card-title mx-1"><?php echo $row->nome; ?> <?php echo $_SESSION['post_id']; ?></h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4><?php echo $row->titulo ?></h4>
+                            <p class="lead"><?php echo $row->content; ?></p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="mb-0" style="color: #6c757d;"><?php echo $dataFormatada; ?></small>
+                            <?php 
+                                $sql = 'SELECT comentarios.comentario, usuarios.nome FROM comentarios JOIN usuarios ON comentarios.user_id = usuarios.id WHERE comentarios.post_id = ?';
+                                $stmt = $conn->prepare($sql);
+                                $stmt->bind_param('i', $_SESSION['post_id']);
+                                $stmt->execute();
+                                $stmt->bind_result($comentario, $nome);
+                                while($stmt->fetch()){?>
+                                    <div class="comentariosContainer">
+                                        <p class="comentario"><strong><?php echo $nome ?></strong> <?php echo $comentario;?></p>
+                                    </div>
+                                <?php } ?>
+                            <form action="comentarios.php" class="comentariosForm" method="post">
+                                <label for="comentario"></label>
+                                <input type="text" id="comentario" name="comentario" placeholder="Escreva um comentário...">
+                                <input type="hidden" value="<?php echo $row->id; ?>" name="postId">
+                                <button type="submit">Publicar</button>
+                            </form>
+                        </div>
+                    </div>
+            <?php }
             }
             ?>
         </div>
     </main>
-    
+
     <script src="https://kit.fontawesome.com/ce1e855864.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
