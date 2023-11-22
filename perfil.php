@@ -70,7 +70,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
         </nav>
     </header>
     <main class="m-auto mt-5">
-
+        
         <div class="container d-md-flex">
             <div class="container">
                 <h1 class="text-center">Editar Perfil</h1>
@@ -103,27 +103,29 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
                     echo '<br>';
                     echo '<div class="overflow-y-scroll" style="height:70vh;">';
                     while ($row = $result->fetch_object()) {
-                        $data = date('d/m/y', strtotime($row->data_post));
-                        echo '<div class="card mb-3">';
-                        echo '<div class = "card-header">';
-                        echo '<div class="d-flex justify-content-between align-items-center">';
-                        echo '<h6 class="card-title m-0">' . $row->nome . '</h6> <a href="apagar.php?idpost=' . $row->id . '" class="text-end text-danger"><i class="fa-solid fa-trash" style="color: #cb2020;"></i></a>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '<div class="card-body">';
-                        echo '<h4>' . $row->titulo . '</h4>';
-                        echo '<p class="lead">' . $row->content . '</p>';
-                        echo '</div>';
-                        echo '<div class="card-footer">';
-                        echo '<small class="mb-0" style="color: #6c757d;">' . $data . '</small>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                    echo '</div>';
-                } else {
+                        $data = date('d/m/y', strtotime($row->data_post)); ?>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="card-title m-0"><?php echo $row->nome; ?></h6>
+                                    <a href="editarpost.php?idpost=<?php echo $row->id; ?>&id=<?php echo $_GET['id'] ?>">Editar</a>
+                                    <a href="apagar.php?idpost=<?php echo $row->id; ?>" class="text-end text-danger"><i class="fa-solid fa-trash" style="color: #cb2020;"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4><?php echo $row->titulo ?></h4>
+                                <p class="lead"><?php echo $row->content ?></p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="mb-0" style="color: #6c757d;"><?php echo $data ?></small>
+                            </div>
+                        </div>
+                    <?php } ?>
+            </div>
+        <?php } else {
                     echo '<p>Não há posts</p>';
                 } ?>
-            </div>
+        </div>
         </div>
     </main>
 
