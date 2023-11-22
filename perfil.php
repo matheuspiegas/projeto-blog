@@ -70,7 +70,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
         </nav>
     </header>
     <main class="m-auto mt-5">
-        
+
         <div class="container d-md-flex">
             <div class="container">
                 <h1 class="text-center">Editar Perfil</h1>
@@ -108,8 +108,10 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h6 class="card-title m-0"><?php echo $row->nome; ?></h6>
-                                    <a href="editarpost.php?idpost=<?php echo $row->id; ?>&id=<?php echo $_GET['id'] ?>">Editar</a>
-                                    <a href="apagar.php?idpost=<?php echo $row->id; ?>" class="text-end text-danger"><i class="fa-solid fa-trash" style="color: #cb2020;"></i></a>
+                                    <div>
+                                        <a class="mx-2" href="editarpost.php?idpost=<?php echo $row->id; ?>&id=<?php echo $_GET['id'] ?>"><i class="fa-solid fa-pen"></i></a>
+                                        <a href="apagar.php?idpost=<?php echo $row->id; ?>" class="text-end text-danger"><i class="fa-solid fa-trash" style="color: #cb2020;"></i></a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
