@@ -2,16 +2,16 @@
 require 'connection.php';
 session_start();
 if ($_SESSION['autenticado'] == true) {
-    $userId = $_GET['id'];
-    $postId = $_GET['idpost'];
     $sql = 'SELECT posts.titulo, posts.content from posts where posts.user_id = ? and posts.id = ?';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ii', $userId, $postId);
+    $stmt->bind_param('ii', $_GET['id'], $_GET['idpost']);
     $stmt->execute();
     $stmt->bind_result($titulo, $content);
     $stmt->fetch();
     $stmt->close();
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo']) && isset($_POST['conteudo'])) {
+        $userId = $_GET['id'];
+        $postId = $_GET['idpost'];
         $sqlUpdate = 'UPDATE posts SET titulo = ?, content = ? WHERE id = ? AND user_id = ?';
         $stmtUpdate = $conn->prepare($sqlUpdate);
 
@@ -21,11 +21,9 @@ if ($_SESSION['autenticado'] == true) {
 
         $stmtUpdate->bind_param('ssii', $_POST['titulo'], $_POST['conteudo'], $postId, $userId);
         $stmtUpdate->execute();
-
         if ($stmtUpdate->affected_rows >= 0) {
-            echo "Atualização bem-sucedida!";
             header('Location: perfil.php?id=' . $userId);
-        } 
+        }
 
         $stmtUpdate->close();
     }
@@ -79,7 +77,7 @@ if ($_SESSION['autenticado'] == true) {
                         <input class="form-control" type="text" name="conteudo" id="conteudo" value="<?php echo $content ?>">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn bg-secondary-subtle">Atualizar</button>
+                        <button type="submit" id="atualizar" class="btn bg-secondary-subtle">Atualizar</button>
                     </div>
                 </div>
             </div>
