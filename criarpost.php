@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['autenticado'] == true) {
     }
 }
 if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
-    header('Location: login.php?erro');
+    header('Location: login.php');
 }
 ?>
 
