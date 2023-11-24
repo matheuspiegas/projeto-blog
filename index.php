@@ -11,23 +11,31 @@
 
 <body class="d-flex align-items-center">
     <main class="m-auto">
-        <div class="d-flex flex-column">
-            <h1 class="text-start h1">Faça Login</h1>
-            <form action="login.php" method="post" class="container form-container p-0">
-                <div class="row mb-3">
-                    <div class="col-12 mb-2">
-                        <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+        <div class="d-flex container gap-3">
+            <div class="imagem d-none d-md-block">
+                <img src="assets/sign_up.svg" alt="" class="img-fluid">
+            </div>
+            <div class="align-self-center">
+                <h1 class="text-start h1 mb-5">Faça Login</h1>
+                <form action="login.php" method="post" class="p-0">
+                    <div class="row mb-3">
+                        <div class="col-12 mb-2">
+                            <input type="text" id="user" name="user" class="form-control" placeholder="Digite seu usuário">
+                        </div>
+                        <div class="col-12">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                        </div>
                     </div>
-                    <div class="col-12">
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                    <div class="row">
+                        <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
+                        <div class="d-flex col-12 mb-3"><a class="btn bg-secondary-subtle flex-grow-1" href="cadastro.php">Cadastrar</a></div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Entrar</button></div>
-                    <div class="d-flex col-12 mb-3"><a class="btn bg-secondary-subtle flex-grow-1" href="cadastro.php">Cadastrar</a></div>
-                </div>
-                <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a> <!-- ainda em desenvolvimento -->
-            </form>
+                    <?php if (!empty($mensagemErro)) { ?>
+                        <p class="text-danger p-0"><?php echo $mensagemErro; ?></p>
+                    <?php } ?>
+                    <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
+                </form>
+            </div>
         </div>
     </main>
 
