@@ -110,7 +110,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
                                     <h6 class="card-title m-0"><?php echo $row->nome; ?></h6>
                                     <div>
                                         <a class="mx-2" href="editarpost.php?idpost=<?php echo $row->id; ?>&id=<?php echo $_GET['id'] ?>"><i class="fa-solid fa-pen"></i></a>
-                                        <a href="apagar.php?idpost=<?php echo $row->id; ?>" class="text-end text-danger"><i class="fa-solid fa-trash" style="color: #cb2020;"></i></a>
+                                        <a href="apagar.php?idpost=<?php echo $row->id; ?>" class="text-end text-danger apagar"><i class="fa-solid fa-trash" style="color: #cb2020;"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -132,6 +132,8 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
     </main>
 
     <script src="https://kit.fontawesome.com/ce1e855864.js" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
