@@ -43,16 +43,31 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
     <main class="container border-start border-end main border-bottom">
         <div class="container feedContainer mt-4">
             <?php
-            $sqlSelect = 'SELECT usuarios.nome, posts.titulo, posts.content, posts.data_post, posts.id, usuarios.foto FROM usuarios INNER JOIN posts ON usuarios.id = posts.user_id ORDER BY data_post DESC';
+            $sqlSelect = 'SELECT
+            usuarios.nome,
+            posts.titulo,
+            posts.content,
+            posts.data_post,
+            posts.id,
+            usuarios.foto,
+            categorias.categoria_nome as categoria
+        FROM
+            usuarios
+        INNER JOIN
+            posts ON usuarios.id = posts.user_id
+        LEFT JOIN
+            categorias ON posts.categoria_id = categorias.id
+        ORDER BY
+            posts.data_post DESC';
             $stmt = $conn->prepare($sqlSelect);
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_object()) {
                     $data = $row->data_post;
                     $timestamp = strtotime($data);
-                    $dataFormatada = date('d/m/Y', $timestamp); 
+                    $dataFormatada = date('d/m/Y', $timestamp);
                     $_SESSION['post_id'] = $row->id;
-                    ?>
+            ?>
                     <div class="card mb-3">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
@@ -71,17 +86,18 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                         </div>
                         <div class="card-footer">
                             <small class="mb-0" style="color: #6c757d;"><?php echo $dataFormatada; ?></small>
-                            <?php 
-                                $sql = 'SELECT comentarios.comentario, usuarios.nome FROM comentarios JOIN usuarios ON comentarios.user_id = usuarios.id WHERE comentarios.post_id = ?';
-                                $stmt = $conn->prepare($sql);
-                                $stmt->bind_param('i', $_SESSION['post_id']);
-                                $stmt->execute();
-                                $stmt->bind_result($comentario, $nome);
-                                while($stmt->fetch()){?>
-                                    <div class="comentariosContainer">
-                                        <p class="comentario"><strong><?php echo $nome ?></strong> <?php echo $comentario;?></p>
-                                    </div>
-                                <?php } ?>
+                            <small class="mb-0" style="color: #6c757d;">Categoria - <?php echo $row->categoria; ?></small>
+                            <?php
+                            $sql = 'SELECT comentarios.comentario, usuarios.nome FROM comentarios JOIN usuarios ON comentarios.user_id = usuarios.id WHERE comentarios.post_id = ?';
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param('i', $_SESSION['post_id']);
+                            $stmt->execute();
+                            $stmt->bind_result($comentario, $nome);
+                            while ($stmt->fetch()) { ?>
+                                <div class="comentariosContainer">
+                                    <p class="comentario"><strong><?php echo $nome ?></strong> <?php echo $comentario; ?></p>
+                                </div>
+                            <?php } ?>
                             <form action="comentarios.php" class="comentariosForm" method="post">
                                 <label for="comentario"></label>
                                 <input type="text" id="comentario" name="comentario" placeholder="Escreva um comentário...">

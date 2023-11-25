@@ -2,7 +2,11 @@
 session_start();
 require 'connection.php';
 if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSION['autenticado'] == true) {
-    $sqlselect = "SELECT usuarios.nome, usuarios.id, posts.titulo, posts.content, posts.data_post, posts.id FROM usuarios INNER JOIN posts ON posts.user_id = usuarios.id AND usuarios.nome = ?";
+    $sqlselect = "SELECT usuarios.nome, usuarios.id, posts.titulo, posts.content, posts.data_post, posts.id, categorias.categoria_nome as categoria
+    FROM usuarios
+    INNER JOIN posts ON posts.user_id = usuarios.id
+    LEFT JOIN categorias ON posts.categoria_id = categorias.id
+    WHERE usuarios.nome = ?";
 
     $sql = "SELECT usuarios.nome, usuarios.foto FROM usuarios WHERE usuarios.id = ? ";
     $stmt = $conn->prepare($sql);
@@ -120,6 +124,7 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
                             </div>
                             <div class="card-footer">
                                 <small class="mb-0" style="color: #6c757d;"><?php echo $data ?></small>
+                                <small class="mb-0" style="color: #6c757d;">Categoria - <?php echo $row->categoria ?></small>
                             </div>
                         </div>
                     <?php } ?>
