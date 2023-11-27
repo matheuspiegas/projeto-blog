@@ -6,7 +6,8 @@ if (isset($_SESSION['userId']) && $_SESSION['userId'] == $_GET['id'] && $_SESSIO
     FROM usuarios
     INNER JOIN posts ON posts.user_id = usuarios.id
     LEFT JOIN categorias ON posts.categoria_id = categorias.id
-    WHERE usuarios.nome = ?";
+    WHERE usuarios.nome = ?
+    ORDER BY posts.data_post DESC";
 
     $sql = "SELECT usuarios.nome, usuarios.foto FROM usuarios WHERE usuarios.id = ? ";
     $stmt = $conn->prepare($sql);
