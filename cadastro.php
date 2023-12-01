@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
                             <p class="text-danger">Preencha todos os campos!</p>
                         </div>
+                        <a href="login.php">Fazer login</a>
                     </form>
                 </div>
             </div>
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
                             <p class="text-danger">Esse usuário ja existe!</p>
                         </div>
+                        <a href="login.php">Fazer login</a>
                     </form>
                 </div>
             </div>
@@ -121,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row">
                             <div class="d-flex col-12 mb-2"><button type="submit" class="btn bg-secondary-subtle flex-grow-1">Cadastrar</button></div>
                         </div>
+                        <a href="login.php">Fazer login</a>
                     </form>
                 </div>
             </div>
