@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="d-flex col-12 mb-3"><a class="btn bg-secondary-subtle flex-grow-1" href="cadastro.php">Cadastrar</a></div>
                             <p class="text-success">Usuário cadastrado com sucesso!</p>
                         </div>
-                        <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
+                        <a href="resetpass.php">Esqueceu sua senha?</a>
                     </form>
                 </div>
             </div>
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?php if (!empty($mensagemErro)) { ?>
                             <p class="text-danger p-0"><?php echo $mensagemErro; ?></p>
                         <?php } ?>
-                        <a href="resetpass.php" class="resetpass">Esqueceu sua senha?</a>
+                        <a href="resetpass.php">Esqueceu sua senha?</a>
                     </form>
                 </div>
             </div>
